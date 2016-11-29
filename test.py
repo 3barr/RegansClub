@@ -36,52 +36,67 @@ with open('cPgList.csv', 'rb') as csvfile:
 		line = list(row[i] for i in [0,1,2,3,4])
 		chromosomeList.append(line)
 
-cOne, cTwo, cThree, cFour, cFive, cSix, cSeven, cEight = []
-cNine, cTen, cEleven, cTwelve, cThirteen, cFourteen, cFifteen = []
-cSixteen, cSeventeen, cEightteen, cNineteen, cX = []
-for i in range(chromosomeList):
+cOne = []
+cTwo = []
+cThree = []
+cFour = [] 
+cFive = [] 
+cSix = []
+cSeven = [] 
+cEight = []
+cNine = []
+cTen = [] 
+cEleven = []
+cTwelve = [] 
+cThirteen = []
+cFourteen = [] 
+cFifteen = []
+cSixteen = []
+cSeventeen = []
+cEightteen = []
+cNineteen = [] 
+cX = []
+for i in range(4664):
 	if (chromosomeList[i][0] == '1'):
 		cOne.append(chromosomeList[i])
-	if else (chromosomeList[i][0] == '2'):
+	elif (chromosomeList[i][0] == '2'):
 		cTwo.append(chromosomeList[i])
-	if else (chromosomeList[i][0] == '3'):
+	elif (chromosomeList[i][0] == '3'):
 		cThree.append(chromosomeList[i])
-	if else (chromosomeList[i][0] == '4'):
+	elif (chromosomeList[i][0] == '4'):
 		cFour.append(chromosomeList[i])
-	if else (chromosomeList[i][0] == '5'):
+	elif (chromosomeList[i][0] == '5'):
 		cFive.append(chromosomeList[i])
-	if else (chromosomeList[i][0] == '6'):
+	elif (chromosomeList[i][0] == '6'):
 		cSix.append(chromosomeList[i])
-	if else (chromosomeList[i][0] == '7'):
+	elif (chromosomeList[i][0] == '7'):
 		cSeven.append(chromosomeList[i])
-	if else (chromosomeList[i][0] == '8'):
+	elif (chromosomeList[i][0] == '8'):
 		cEight.append(chromosomeList[i])
-	if else (chromosomeList[i][0] == '9'):
+	elif (chromosomeList[i][0] == '9'):
 		cNine.append(chromosomeList[i])
-	if else (chromosomeList[i][0] == '10'):
+	elif (chromosomeList[i][0] == '10'):
 		cTen.append(chromosomeList[i])
-	if else (chromosomeList[i][0] == '11'):
+	elif (chromosomeList[i][0] == '11'):
 		cEleven.append(chromosomeList[i])
-	if else (chromosomeList[i][0] == '12'):
+	elif (chromosomeList[i][0] == '12'):
 		cTwelve.append(chromosomeList[i])
-	if else (chromosomeList[i][0] == '13'):
+	elif (chromosomeList[i][0] == '13'):
 		cThirteen.append(chromosomeList[i])
-	if else (chromosomeList[i][0] == '14'):
+	elif (chromosomeList[i][0] == '14'):
 		cFourteen.append(chromosomeList[i])
-	if else (chromosomeList[i][0] == '15'):
+	elif (chromosomeList[i][0] == '15'):
 		cFifteen.append(chromosomeList[i])
-	if else (chromosomeList[i][0] == '16'):
+	elif (chromosomeList[i][0] == '16'):
 		cSixteen.append(chromosomeList[i])
-	if else (chromosomeList[i][0] == '17'):
+	elif (chromosomeList[i][0] == '17'):
 		cSeventeen.append(chromosomeList[i])
-	if else (chromosomeList[i][0] == '18'):
+	elif (chromosomeList[i][0] == '18'):
 		cEightteen.append(chromosomeList[i])
-	if else (chromosomeList[i][0] == '4'):
+	elif (chromosomeList[i][0] == '4'):
 		cNineteen.append(chromosomeList[i])
 	else:
 		cX.append(chromosomeList[i])
 
-print cOne
-		
-		#while(row == 1 in reader):
-		#print ', '.join(row)
+
+	
