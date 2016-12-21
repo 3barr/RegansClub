@@ -89,10 +89,11 @@ def splitChromosomes():
 			cSeventeen.append(chromosomeList[i])
 		elif (chromosomeList[i][0] == '18'):
 			cEightteen.append(chromosomeList[i])
-		elif (chromosomeList[i][0] == '4'):
+		elif (chromosomeList[i][0] == '19'):
 			cNineteen.append(chromosomeList[i])
-		else:
+		elif (chromosomeList[i][0] == 'X'):
 			cX.append(chromosomeList[i])
+#End of SplitChromosomes
 
 #To avoid global variables return each chromosome to a place in an array
 #put file name in same spot as chromsome array
@@ -107,15 +108,14 @@ def readChromosome(file, chromosome):
 	handle.close()
 	#chromosome[chromosome number, region start, region end, length, peak position]
 	chromosomeLength = len(chromosome)
-	
 	sequence = (records[0].seq)
 	chromosomeHistone = []
-	for i in range(20): #chromosomeLength
+	for i in range(chromosomeLength): #chromosomeLength
 		start = chromosome[i][1]
-		end = chromosome[i][2]	
+		end = chromosome[i][2]
 		#tail = 0 #Back histone (Last basepair) in the chain ex: -5...5 or -4..2 depending on peakPos
 		#head = 0 #Head histone (Front most basepair)
-		peakPos = chromosome[i][4] #Highest level of 'cg' middle of 0 histone
+		peakPos = long(chromosome[i][4]) #Highest level of 'cg' middle of 0 histone
 		
 		left = int(start) - int(peakPos) #Histone length region left of peak pos
 		right = int(end) - int(peakPos) #Histone length region left of peak pos
@@ -124,58 +124,66 @@ def readChromosome(file, chromosome):
 		
 		hOne = sequence[(int(peakPos) - 100):(int(peakPos) + 100)] 
 		#print hOne.count('cg')
-		histoneChain=[hOne.count('cg')]
+		histoneMid = [(hOne.count('cg'))+(hOne.count('CG'))]
+		#histoneMid = [(hOne.count('gc')) + (hOne.count('GC'))]
+		#histoneMid = [hOne.count('c') + hOne.count('g') + hOne.count('C') +hOne.count('G')]
+
 		
+		
+		histoneChainRight = []
 		i = int(peakPos) + 100
 		while (i <= right): 
-			Histone = sequence[i:i+200] #sequence of 200bp
-			numCG = Histone.count('cg')
-			histoneChain.append(numCG)
+			histone = sequence[i:i+200] #sequence of 200bp histone length
+			numCG = histone.count('cg') + histone.count('CG')
+			#numGC = histone.count('gc') + histone.count('GC')
+			#numCG = histone.count('c') + histone.count('g') + histone.count('C') +histone.count('G')
+			# print histone
+			# print "Right side"
+			# print "Histone Lenght: " , len(histone)
+			# print "Number of cg and CG: " , numCG
+			# print "***************************************"
+
+			histoneChainRight.append(numCG)
 			i = i+200
 			
 		#print histoneChain
 		
+		histoneChainLeft = []
 		i = int(peakPos) - 100
-		while(left <= i):
-			Histone = sequence[left: left + 200]
-			numCG = Histone.count('cg')
-			histoneChain.append(numCG)
-			left = left + 200
+		while(i >= left):
+			histone = sequence[i-200: i]
+			numCG = histone.count('cg') + histone.count('CG')
+			#numGC = histone.count('gc') + histone.count('GC')
+			#numCG = histone.count('c') + histone.count('g') + histone.count('C') +histone.count('G')
+			# print histone
+			# print "Left side"
+			# print "Histone Lenght: " , len(histone)
+			# print "Number of cg and CG: " , numCG
+			# print "***************************************"
+			histoneChainLeft.append(numCG)
+			i = i - 200
 		
 		#print histoneChain
-
+		histoneChain = [histoneChainLeft,histoneMid,histoneChainRight]
+		
 		chromosomeHistone.append(histoneChain)
 		
 	print chromosomeHistone
 #End readChromosome
-	
-	
-
-# start = 3967125
-# end = 3968125
-# peakPos = 3661437
-
-# firstSeq = sequence[start:end]
-
-# numC = firstSeq.count('c') + firstSeq.count('C')
-
-# numG = firstSeq.count('g') + firstSeq.count('G')
 
 
-# print firstSeq
-
-# print "Number of C:", numC
-# print "Number of G:", numG
-
-#my_data = genfromtxt('cPgList.csv', dilimiter = ',')
-#print my_data[1][1]			
-			
-			
-		
 		
 #Start main
 splitChromosomes()
 #print cOne
 
-readChromosome("mm8Build36/chr1.fa",cOne)				
+genome = [cOne,cTwo,cThree,cFour,cFive,cSix,cSeven,cEight,cNine,cTen,cEleven,cTwelve,cThirteen,cFourteen,cFifteen,cSixteen,cSeventeen,cEightteen,cNineteen,cX]
+
+chromosomeFiles = ["mm8Build36/chr1.fa", "mm8Build36/chr2.fa","mm8Build36/chr3.fa","mm8Build36/chr4.fa","mm8Build36/chr5.fa","mm8Build36/chr6.fa","mm8Build36/chr7.fa","mm8Build36/chr8.fa","mm8Build36/chr9.fa","mm8Build36/chr10.fa","mm8Build36/chr11.fa","mm8Build36/chr12.fa","mm8Build36/chr13.fa","mm8Build36/chr14.fa","mm8Build36/chr15.fa","mm8Build36/chr16.fa","mm8Build36/chr17.fa","mm8Build36/chr18.fa","mm8Build36/chr19.fa","mm8Build36/chrX.fa" ]
+
+
+for i in range(20):
+	print "Chromosome: ", (i+1)
+	readChromosome(chromosomeFiles[i],genome[i])	
+	print "********************************************************************************"
 
